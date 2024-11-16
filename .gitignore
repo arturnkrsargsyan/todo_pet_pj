@@ -1,0 +1,45 @@
+# Dart & Flutter related
+**/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+*.log
+
+# Flutter specific for iOS
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/.symlinks/
+ios/Pods/
+ios/Podfile.lock
+ios/Runner.xcworkspace/
+ios/DerivedData/
+ios/.generated/
+
+# Flutter specific for Android
+android/.gradle/
+android/.idea/
+android/local.properties
+android/app/*.iml
+android/app/debug.keystore
+*.lock
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Generated files
+**/*.g.dart
+**/*.freezed.dart
+
+# Miscellaneous
+*.tmp
+*.swp
+*.DS_Store
+*.apk
+*.ipa
