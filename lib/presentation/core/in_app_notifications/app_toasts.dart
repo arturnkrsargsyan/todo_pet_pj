@@ -27,7 +27,15 @@ class AppToast extends StatelessWidget {
   factory AppToast.error(String message) {
     return AppToast(
       background: AppColors.error,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 3),
+      message: message,
+    );
+  }
+
+   factory AppToast.success(String message) {
+    return AppToast(
+      background: AppColors.success,
+      duration: const Duration(seconds: 3),
       message: message,
     );
   }
