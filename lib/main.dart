@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/presentation/app/run_app.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runAndInitialize();
 
+
+// TODO Remove MyApp widget
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
