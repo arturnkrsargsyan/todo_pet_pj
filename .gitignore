@@ -43,3 +43,13 @@ android/app/debug.keystore
 *.DS_Store
 *.apk
 *.ipa
+
+# Generated files
+*.gr.dart
+*.g.dart
+*.gen.dart
+*.freezed.dart
+*.config.dart
+
+# Sensitive data
+.env
