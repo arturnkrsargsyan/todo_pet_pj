@@ -1,3 +1,3 @@
-import 'package:todo_app/app/run_app.dart';
+import 'package:todo_app/app/core/run_app.dart';
 
 void main() => runAndInitialize();

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:todo_app/app/domain/auth/i_auth_repository.dart';
+import 'package:todo_app/domain/auth/i_auth_repository.dart';
 
 class AuthRepositoryImpl implements IAuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
