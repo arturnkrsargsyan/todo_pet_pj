@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/presentation/core/consts/typography.dart';
-import 'package:todo_app/presentation/login/widget/clippath_clipper.dart';
+import 'package:todo_app/presentation/auth/widget/clippath_clipper.dart';
 
 class Custompainter extends StatelessWidget {
   const Custompainter({super.key, required this.appText});
@@ -9,7 +9,7 @@ class Custompainter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
-      clipper: ClippathClipper(),
+      clipper: ChildpathClipper(),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.blue,

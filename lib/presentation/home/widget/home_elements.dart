@@ -28,9 +28,9 @@ class HomeElements extends StatelessWidget {
           ),
           const Spacer(),
           Button(
-            bottonText: 'Get Started',
+            buttonText: 'Get Started',
             buttonFunction: () {
-              context.router.push(const LoginRoute());
+              context.router.push(const AuthRoute());
             },
           ),
           const Spacer(),

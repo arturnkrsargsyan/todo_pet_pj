@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/app/auth/auth_block.dart';
-import 'package:todo_app/lc.dart';
+import 'package:todo_app/application/auth/auth_block.dart';
+import 'package:todo_app/di.dart';
 import 'package:todo_app/presentation/core/router/router.dart';
 
 class Todo extends StatelessWidget {
@@ -11,7 +11,7 @@ class Todo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => lc<AuthBloc>(),
+      create: (context) => di<AuthBloc>(),
       child: MaterialApp.router(
         title: 'Todo App',
         routerConfig: appRouter.config(),

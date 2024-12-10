@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextfildStyle extends StatelessWidget {
-  const TextfildStyle(
+class TextFieldStyle extends StatelessWidget {
+  const TextFieldStyle(
       {super.key,
       required this.labelText,
       required this.prefixIconAdd,

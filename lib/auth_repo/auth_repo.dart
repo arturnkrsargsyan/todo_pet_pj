@@ -9,9 +9,9 @@ class AuthRepo {
     return authenticated;
   }
 
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
+  // Future<void> signOut() async {
+  //   await _auth.signOut();
+  // }
 
   Future<void> login() async {}
 }

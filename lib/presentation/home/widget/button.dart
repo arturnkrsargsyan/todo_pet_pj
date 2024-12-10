@@ -3,8 +3,8 @@ import 'package:todo_app/presentation/core/consts/typography.dart';
 
 class Button extends StatelessWidget {
   const Button(
-      {super.key, required this.bottonText, required this.buttonFunction});
-  final String bottonText;
+      {super.key, required this.buttonText, required this.buttonFunction});
+  final String buttonText;
   final Function()? buttonFunction;
 
   @override
@@ -20,7 +20,7 @@ class Button extends StatelessWidget {
         ),
         textStyle: AppTypography.s20w6h20,
       ),
-      child: Text(bottonText),
+      child: Text(buttonText),
     );
   }
 }
