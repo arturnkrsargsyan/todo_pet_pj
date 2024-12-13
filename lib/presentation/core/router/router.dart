@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:todo_app/presentation/auth/auth_screen.dart';
 import 'package:todo_app/presentation/home/home_screen.dart';
 import 'package:todo_app/presentation/to_do_page/to_do_screen.dart';
+import 'package:todo_app/presentation/to_do_screen/to_do_add_screen.dart';
 
 part 'router.gr.dart';
 
@@ -21,6 +22,10 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
           path: '/to_do',
           page: ToDoRoute.page,
+        ),
+        AutoRoute(
+          path: '/to_do_add',
+          page: ToDoAddRoute.page,
         ),
       ];
 }

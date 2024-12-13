@@ -48,6 +48,25 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ToDoAddScreen]
+class ToDoAddRoute extends PageRouteInfo<void> {
+  const ToDoAddRoute({List<PageRouteInfo>? children})
+      : super(
+          ToDoAddRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ToDoAddRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ToDoAddScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [ToDoScreen]
 class ToDoRoute extends PageRouteInfo<void> {
   const ToDoRoute({List<PageRouteInfo>? children})

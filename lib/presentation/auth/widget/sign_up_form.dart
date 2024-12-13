@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/presentation/auth/widget/text_field_style.dart';
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({super.key});
+  const SignUpForm(
+      {super.key,
+      required this.emailController,
+      required this.passwordController,
+      required this.confirmPasswordController});
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
+    // TextEditingController emailController = TextEditingController();
+    // TextEditingController passwordController = TextEditingController();
+    // TextEditingController confirmPasswordController = TextEditingController();
     return Column(
       children: [
         Padding(

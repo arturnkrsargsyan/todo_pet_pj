@@ -1,22 +1,21 @@
 import 'package:get_it/get_it.dart';
 import 'package:todo_app/application/auth/auth_block.dart';
 import 'package:todo_app/domain/auth/i_auth_repository.dart';
-import 'package:todo_app/infrastructure/auth/auth_repositoy_impl.dart';
+import 'package:todo_app/infrastructure/auth/auth_repository_impl.dart';
 import 'package:todo_app/auth_repo/auth_repo.dart';
 
-// di
-final lc = GetIt.instance;
+final di = GetIt.instance;
 Future<void> initializeDependencies() async {
-  lc.registerSingleton(
+  di.registerSingleton(
     AuthRepo(),
   );
-  lc.registerSingleton<IAuthRepository>(
+  di.registerSingleton<IAuthRepository>(
     AuthRepositoryImpl(),
   );
 
-  lc.registerLazySingleton<AuthBloc>(
+  di.registerLazySingleton<AuthBloc>(
     () => AuthBloc(
-      lc(),
+      di(),
     ),
   );
 }

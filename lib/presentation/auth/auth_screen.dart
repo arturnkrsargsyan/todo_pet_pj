@@ -21,39 +21,51 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool change = true;
+  bool isSignIn = true;
 
-  void changeFunction() {
+  void isSignInFunction() {
     setState(() {
-      change = !change;
+      isSignIn = !isSignIn;
     });
   }
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthStateSuccessful) {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) {
-              return const SizedBox();
-            },
-          ));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return const SizedBox();
+              },
+            ),
+          );
         }
       },
       child: Scaffold(
           body: SingleChildScrollView(
         child: Column(
           children: [
-            Custompainter(appText: change ? 'Login' : 'Sign Up'),
+            Custompainter(appText: isSignIn ? 'Login' : 'Sign Up'),
             const SizedBox(height: 30),
             Form(
                 key: formKey,
-                child: change ? const LoginForm() : const SignUpForm()),
-            SizedBox(height: change ? 150 : 70),
+                child: isSignIn
+                    ? LoginForm(
+                        emailController: emailController,
+                        passwordController: passwordController,
+                      )
+                    : SignUpForm(
+                        emailController: emailController,
+                        passwordController: passwordController,
+                        confirmPasswordController: confirmPasswordController,
+                      )),
+            SizedBox(height: isSignIn ? 150 : 70),
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthStateSuccessful) {
@@ -65,7 +77,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   return const CircularProgressIndicator();
                 }
                 return Button(
-                  buttonText: change ? 'Log in' : 'Sign Up',
+                  buttonText: isSignIn ? 'Log in' : 'Sign Up',
                   buttonFunction: () {
                     if (formKey.currentState!.validate()) {}
                     if (emailController.text.isEmpty ||
@@ -85,10 +97,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             const SizedBox(height: 20),
             Text(
-              change ? 'Dont Have A Account?' : '',
+              isSignIn ? 'Dont Have A Account?' : '',
               style: AppTypography.s14w4h20,
             ),
-            change
+            isSignIn
                 ? const SizedBox()
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -112,10 +124,10 @@ class _AuthScreenState extends State<AuthScreen> {
             const SizedBox(height: 10),
             InkWell(
               onTap: () {
-                changeFunction();
+                isSignInFunction();
               },
               child: Text(
-                change ? 'Sign Up!' : 'Our sign up whit',
+                isSignIn ? 'Sign Up!' : 'Our sign up whit',
                 style: AppTypography.s16w5h19_b,
               ),
             ),

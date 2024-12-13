@@ -1,34 +1,38 @@
+// json serializable
 class ToDo {
   final String id;
   final String title;
-  final DateTime start_data;
-  final DateTime? end_data;
+  final DateTime startData;
+  final DateTime? endData;
   final String? description;
   final bool isCompleted;
+
   ToDo({
     required this.id,
     required this.title,
-    required this.start_data,
-    this.end_data,
+    required this.startData,
+    this.endData,
     this.description,
     required this.isCompleted,
   });
+
   factory ToDo.fromJson(Map<String, dynamic> json) {
     return ToDo(
       id: json['id'],
       title: json['title'],
-      start_data: json['startDate'],
-      end_data: json['endDate'],
+      startData: json['startData'],
+      endData: json['endData'],
       description: json['description'],
       isCompleted: json['isCompleted'],
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-      'start_data': start_data,
-      'end_data': end_data,
+      'startData': startData,
+      'endData': endData,
       'description': description,
       'isCompleted': isCompleted,
     };
