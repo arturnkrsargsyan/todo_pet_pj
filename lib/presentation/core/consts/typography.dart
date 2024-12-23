@@ -41,4 +41,11 @@ class AppTypography {
     fontWeight: FontWeight.w400,
     height: 20 / 16,
   );
+
+  static const s18wh70h20 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: Colors.white70,
+    height: 20 / 16,
+  );
 }
