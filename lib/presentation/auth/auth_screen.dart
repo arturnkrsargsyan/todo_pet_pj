@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/application/auth/auth_block.dart';
 import 'package:todo_app/application/auth/auth_event.dart';
 import 'package:todo_app/application/auth/auth_state.dart';
+import 'package:todo_app/application/get_task/get_task_bloc.dart';
 import 'package:todo_app/gen/assets.gen.dart';
 import 'package:todo_app/presentation/auth/widget/customPainter.dart';
 import 'package:todo_app/presentation/auth/widget/login_form.dart';
@@ -31,6 +32,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController signEmailController = TextEditingController();
+  TextEditingController signPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
@@ -61,38 +64,59 @@ class _AuthScreenState extends State<AuthScreen> {
                         passwordController: passwordController,
                       )
                     : SignUpForm(
-                        emailController: emailController,
-                        passwordController: passwordController,
+                        emailController: signEmailController,
+                        passwordController: signPasswordController,
                         confirmPasswordController: confirmPasswordController,
                       )),
             SizedBox(height: isSignIn ? 150 : 70),
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthStateSuccessful) {
-                  context.router.push(const ToDoRoute());
+                  context.router.push(ToDoRoute());
                 }
               },
               builder: (context, state) {
                 if (state is AuthStateInProgress) {
                   return const CircularProgressIndicator();
                 }
-                return Button(
-                  buttonText: isSignIn ? 'Log in' : 'Sign Up',
-                  buttonFunction: () {
-                    if (formKey.currentState!.validate()) {}
-                    if (emailController.text.isEmpty ||
-                        passwordController.text.isEmpty) {
-                      return;
-                    }
+                return isSignIn
+                    ? Button(
+                        buttonText: 'Log in',
+                        buttonFunction: () {
+                          if (formKey.currentState!.validate()) {}
+                          if (emailController.text.isEmpty ||
+                              passwordController.text.isEmpty) {
+                            return;
+                          }
 
-                    context.read<AuthBloc>().add(
-                          LoginWithEmailAndPassword(
-                            emailController.text,
-                            passwordController.text,
-                          ),
-                        );
-                  },
-                );
+                          context.read<AuthBloc>().add(
+                                LoginWithEmailAndPassword(
+                                  emailController.text,
+                                  passwordController.text,
+                                ),
+                              );
+
+                          context.read<GetTaskBloc>().add(FetchTasks());
+                        },
+                      )
+                    : Button(
+                        buttonText: 'Sign Up',
+                        buttonFunction: () {
+                          if (formKey.currentState!.validate()) {}
+                          if (signEmailController.text.isEmpty ||
+                              signPasswordController.text.isEmpty) {
+                            return;
+                          }
+
+                          context.read<AuthBloc>().add(
+                                SignUpWhitEmailAndPassword(
+                                  signEmailController.text,
+                                  signPasswordController.text,
+                                ),
+                              );
+                          context.read<GetTaskBloc>().add(FetchTasks());
+                        },
+                      );
               },
             ),
             const SizedBox(height: 20),

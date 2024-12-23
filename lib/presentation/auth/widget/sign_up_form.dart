@@ -13,9 +13,6 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TextEditingController emailController = TextEditingController();
-    // TextEditingController passwordController = TextEditingController();
-    // TextEditingController confirmPasswordController = TextEditingController();
     return Column(
       children: [
         Padding(

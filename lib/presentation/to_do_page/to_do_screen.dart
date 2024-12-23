@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/application/get_task/get_task_bloc.dart';
 import 'package:todo_app/presentation/core/router/router.dart';
 import 'package:todo_app/presentation/home/widget/button.dart';
 
 @RoutePage()
 class ToDoScreen extends StatelessWidget {
   const ToDoScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +21,48 @@ class ToDoScreen extends StatelessWidget {
                 Text('To do task'),
               ],
             ),
+            SizedBox(
+              height: 200,
+              child: BlocBuilder<GetTaskBloc, GetTaskState>(
+                builder: (context, state) {
+                  if (state is GetTaskLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is GetTaskSuccess) {
+                    return ListView.builder(
+                      itemCount: state.task.length,
+                      itemBuilder: (context, index) {
+                        final tasks = state.task[index];
+                        return SizedBox(
+                          height: 80,
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              Text(tasks.title),
+                              Text(tasks.description!),
+                              Row(
+                                children: [
+                                  Text('${tasks.startData.day}'),
+                                  Text('${tasks.startData.month}'),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('${tasks.endData.day}'),
+                                  Text('${tasks.endData.month}'),
+                                ],
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  } else if (state is GetTaskFailure) {
+                    return Center(child: Text(state.error));
+                  }
+                  return const Center(child: Text('No tasks available'));
+                },
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -27,7 +70,7 @@ class ToDoScreen extends StatelessWidget {
                 Button(
                   buttonText: '+',
                   buttonFunction: () {
-                    context.router.push(const ToDoAddRoute());
+                    context.router.push(const TaskAddRoute());
                   },
                 ),
               ],
