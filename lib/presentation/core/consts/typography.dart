@@ -48,4 +48,10 @@ class AppTypography {
     color: Colors.white70,
     height: 20 / 16,
   );
+  static const s16w5h1w = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 19.6 / 16,
+    color: Colors.white70,
+  );
 }
