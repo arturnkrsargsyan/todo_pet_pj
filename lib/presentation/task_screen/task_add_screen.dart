@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/application/to_do_task/to_do_task_block.dart';
-import 'package:todo_app/application/to_do_task/to_do_task_event.dart';
-import 'package:todo_app/application/to_do_task/to_do_task_state.dart';
+import 'package:todo_app/application/to_do_task/task_performer_block.dart';
+import 'package:todo_app/application/to_do_task/task_performer_event.dart';
+import 'package:todo_app/application/to_do_task/task_performer_state.dart';
 import 'package:todo_app/infrastructure/task/models/to_do.dart';
 import 'package:todo_app/presentation/auth/widget/text_field_style.dart';
 import 'package:todo_app/presentation/core/router/router.dart';
-import 'package:todo_app/presentation/home/widget/button.dart';
+import 'package:todo_app/presentation/home/widget/custom_button.dart';
 import 'package:uuid/uuid.dart';
 
 @RoutePage()
@@ -32,13 +32,13 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<TaskBloc, TaskState>(
+      body: BlocBuilder<TaskPerformerBloc, TaskPerformerState>(
         builder: (context, state) {
-          if (state is TaskLoadingState) {
+          if (state is TaskPerformerLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is TaskFailure) {
+          } else if (state is TaskPerformerFailure) {
             return Center(child: Text('Error: ${state.error}'));
-          } else if (state is TaskSuccessfulState) {
+          } else if (state is TaskPerformerSuccessful) {
             return const Center(child: Text('Task Added Successfully!'));
           }
 
@@ -66,7 +66,7 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
                       },
                       textFildController: descriptionController),
                   Text('Start Date: $_startDate'),
-                  Button(
+                  CustomButton(
                     buttonText: ' Start Date',
                     buttonFunction: () async {
                       DateTime? newDate = await showDatePicker(
@@ -83,7 +83,7 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
                     },
                   ),
                   Text('End Date: $_endDate'),
-                  Button(
+                  CustomButton(
                     buttonText: 'Set End Date',
                     buttonFunction: () async {
                       DateTime? newDate = await showDatePicker(
@@ -99,7 +99,7 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
                       }
                     },
                   ),
-                  Button(
+                  CustomButton(
                     buttonText: 'Send',
                     buttonFunction: () async {
                       if (_formKey.currentState!.validate()) {
@@ -110,7 +110,9 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
                             isCompleted: false,
                             description: descriptionController.text,
                             endData: _endDate);
-                        context.read<TaskBloc>().add(AddTaskTaskEvent(task));
+                        context
+                            .read<TaskPerformerBloc>()
+                            .add(AddTaskPerformerEvent(task));
                         context.router.push(const TaskAddRoute());
                       }
                     },

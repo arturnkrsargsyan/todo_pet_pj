@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/application/auth/auth_block.dart';
 import 'package:todo_app/application/auth/auth_event.dart';
 import 'package:todo_app/application/auth/auth_state.dart';
-import 'package:todo_app/application/get_task/get_task_bloc.dart';
+import 'package:todo_app/application/get_task/task_fetcher_bloc.dart';
 import 'package:todo_app/gen/assets.gen.dart';
-import 'package:todo_app/presentation/auth/widget/customPainter.dart';
+import 'package:todo_app/presentation/auth/widget/auth_app_bar.dart';
 import 'package:todo_app/presentation/auth/widget/login_form.dart';
 import 'package:todo_app/presentation/auth/widget/sign_up_form.dart';
 import 'package:todo_app/presentation/core/consts/typography.dart';
 import 'package:todo_app/presentation/core/router/router.dart';
-import 'package:todo_app/presentation/home/widget/button.dart';
+import 'package:todo_app/presentation/home/widget/custom_button.dart';
 
 @RoutePage()
 class AuthScreen extends StatefulWidget {
@@ -22,6 +22,12 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  // TextEditingController signEmailController = TextEditingController();
+  // TextEditingController signPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool isSignIn = true;
 
   void isSignInFunction() {
@@ -30,12 +36,6 @@ class _AuthScreenState extends State<AuthScreen> {
     });
   }
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController signEmailController = TextEditingController();
-  TextEditingController signPasswordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
@@ -54,25 +54,28 @@ class _AuthScreenState extends State<AuthScreen> {
           body: SingleChildScrollView(
         child: Column(
           children: [
-            Custompainter(appText: isSignIn ? 'Login' : 'Sign Up'),
+            AuthAppBar(appText: isSignIn ? 'Login' : 'Sign Up'),
             const SizedBox(height: 30),
             Form(
-                key: formKey,
-                child: isSignIn
-                    ? LoginForm(
-                        emailController: emailController,
-                        passwordController: passwordController,
-                      )
-                    : SignUpForm(
-                        emailController: signEmailController,
-                        passwordController: signPasswordController,
-                        confirmPasswordController: confirmPasswordController,
-                      )),
+              key: formKey,
+              child: isSignIn
+                  ? LoginForm(
+                      emailController: emailController,
+                      passwordController: passwordController,
+                    )
+                  : SignUpForm(
+                      emailController: emailController,
+                      passwordController: passwordController,
+                      confirmPasswordController: confirmPasswordController,
+                    ),
+            ),
             SizedBox(height: isSignIn ? 150 : 70),
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthStateSuccessful) {
-                  context.router.push(ToDoRoute());
+                  context.router.push(
+                    ToDoRoute(),
+                  );
                 }
               },
               builder: (context, state) {
@@ -80,7 +83,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   return const CircularProgressIndicator();
                 }
                 return isSignIn
-                    ? Button(
+                    ? CustomButton(
                         buttonText: 'Log in',
                         buttonFunction: () {
                           if (formKey.currentState!.validate()) {}
@@ -96,36 +99,37 @@ class _AuthScreenState extends State<AuthScreen> {
                                 ),
                               );
 
-                          context.read<GetTaskBloc>().add(FetchTasks());
+                          context.read<TaskFetcherBloc>().add(
+                                FetchTasks(),
+                              );
                         },
                       )
-                    : Button(
+                    : CustomButton(
                         buttonText: 'Sign Up',
                         buttonFunction: () {
                           if (formKey.currentState!.validate()) {}
-                          if (signEmailController.text.isEmpty ||
-                              signPasswordController.text.isEmpty) {
+                          if (emailController.text.isEmpty ||
+                              passwordController.text.isEmpty) {
                             return;
                           }
 
                           context.read<AuthBloc>().add(
                                 SignUpWhitEmailAndPassword(
-                                  signEmailController.text,
-                                  signPasswordController.text,
+                                  emailController.text,
+                                  passwordController.text,
                                 ),
                               );
-                          context.read<GetTaskBloc>().add(FetchTasks());
+                          context.read<TaskFetcherBloc>().add(FetchTasks());
                         },
                       );
               },
             ),
             const SizedBox(height: 20),
-            Text(
-              isSignIn ? 'Dont Have A Account?' : '',
-              style: AppTypography.s14w4h20,
-            ),
             isSignIn
-                ? const SizedBox()
+                ? Text(
+                    isSignIn ? 'Dont Have A Account?' : '',
+                    style: AppTypography.s14w4h20,
+                  )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

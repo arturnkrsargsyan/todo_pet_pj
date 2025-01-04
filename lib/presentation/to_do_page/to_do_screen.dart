@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/application/get_task/get_task_bloc.dart';
+import 'package:todo_app/application/get_task/task_fetcher_bloc.dart';
 import 'package:todo_app/presentation/core/router/router.dart';
-import 'package:todo_app/presentation/home/widget/button.dart';
+import 'package:todo_app/presentation/home/widget/custom_button.dart';
 
 @RoutePage()
 class ToDoScreen extends StatelessWidget {
@@ -23,11 +23,11 @@ class ToDoScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 200,
-              child: BlocBuilder<GetTaskBloc, GetTaskState>(
+              child: BlocBuilder<TaskFetcherBloc, TaskFetcherState>(
                 builder: (context, state) {
-                  if (state is GetTaskLoading) {
+                  if (state is TaskFetcherLoading) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (state is GetTaskSuccess) {
+                  } else if (state is TaskFetcherSuccess) {
                     return ListView.builder(
                       itemCount: state.task.length,
                       itemBuilder: (context, index) {
@@ -56,7 +56,7 @@ class ToDoScreen extends StatelessWidget {
                         );
                       },
                     );
-                  } else if (state is GetTaskFailure) {
+                  } else if (state is TaskFetcherFailure) {
                     return Center(child: Text(state.error));
                   }
                   return const Center(child: Text('No tasks available'));
@@ -67,7 +67,7 @@ class ToDoScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Button(
+                CustomButton(
                   buttonText: '+',
                   buttonFunction: () {
                     context.router.push(const TaskAddRoute());

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/gen/assets.gen.dart';
 import 'package:todo_app/presentation/core/consts/typography.dart';
 import 'package:todo_app/presentation/core/router/router.dart';
-import 'package:todo_app/presentation/home/widget/button.dart';
+import 'package:todo_app/presentation/home/widget/custom_button.dart';
 
 class HomeElements extends StatelessWidget {
   const HomeElements({super.key});
@@ -27,7 +27,7 @@ class HomeElements extends StatelessWidget {
             style: AppTypography.s25w6h20,
           ),
           const Spacer(),
-          Button(
+          CustomButton(
             buttonText: 'Get Started',
             buttonFunction: () {
               context.router.push(const AuthRoute());

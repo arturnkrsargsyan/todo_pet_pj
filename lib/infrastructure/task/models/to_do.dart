@@ -6,8 +6,11 @@ part 'to_do.g.dart';
 class TaskToDo {
   final String id;
   final String title;
+  @JsonKey(name: 'start_data')
   final DateTime startData;
+  @JsonKey(name: 'endData')
   final DateTime endData;
+  @JsonKey(name: 'description')
   final String? description;
   final bool isCompleted;
 

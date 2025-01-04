@@ -11,8 +11,6 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TextEditingController emailController = TextEditingController();
-    // TextEditingController passwordController = TextEditingController();
     return Column(
       children: [
         Padding(

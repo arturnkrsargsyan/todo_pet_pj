@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/presentation/core/consts/typography.dart';
 
-class Button extends StatelessWidget {
-  const Button(
+class CustomButton extends StatelessWidget {
+  const CustomButton(
       {super.key, required this.buttonText, required this.buttonFunction});
   final String buttonText;
   final Function()? buttonFunction;

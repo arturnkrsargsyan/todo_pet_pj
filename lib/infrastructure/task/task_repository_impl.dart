@@ -16,11 +16,11 @@ class TaskRepositoryImpl implements ITaskRepository {
   }
 
   @override
-  Future<Either<String, List<TaskToDo>>> getTask() async {
+  Future<Either<String, List<TaskToDo>>> fetchTask() async {
     try {
-      QuerySnapshot querySnapshot = await _firestore.collection('task').get();
+      final querySnapshot = await _firestore.collection('task').get();
       final List<TaskToDo> tasks = querySnapshot.docs.map((doc) {
-        return TaskToDo.fromJson(doc.data() as Map<String, dynamic>);
+        return TaskToDo.fromJson(doc.data());
       }).toList();
       return Right(tasks);
     } catch (e) {

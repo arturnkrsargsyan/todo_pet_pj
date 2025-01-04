@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/infrastructure/task/models/to_do.dart';
 
 @immutable
-class TaskEvent {}
+class TaskPerformerEvent {}
 
-class AddTaskTaskEvent extends TaskEvent {
+class AddTaskPerformerEvent extends TaskPerformerEvent {
   final TaskToDo task;
 
-  AddTaskTaskEvent(this.task);
+  AddTaskPerformerEvent(this.task);
 }

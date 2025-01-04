@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/presentation/core/consts/typography.dart';
-import 'package:todo_app/presentation/auth/widget/clippath_clipper.dart';
+import 'package:todo_app/presentation/auth/widget/app_bar_background%20.dart';
 
-class Custompainter extends StatelessWidget {
-  const Custompainter({super.key, required this.appText});
+class AuthAppBar extends StatelessWidget {
+  const AuthAppBar({super.key, required this.appText});
   final String appText;
 
   @override
   Widget build(BuildContext context) {
     return ClipPath(
-      clipper: ChildpathClipper(),
+      clipper: AppBarBackground(),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.blue,
