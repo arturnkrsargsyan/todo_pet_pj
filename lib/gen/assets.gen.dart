@@ -23,12 +23,12 @@ class $AssetsImagesGen {
   AssetGenImage get homeImg =>
       const AssetGenImage('assets/images/home_img.png');
 
-  /// File path: assets/images/instagam.png
-  AssetGenImage get instagam =>
-      const AssetGenImage('assets/images/instagam.png');
+  /// File path: assets/images/instagram.png
+  AssetGenImage get instagram =>
+      const AssetGenImage('assets/images/instagram.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [facebook, google, homeImg, instagam];
+  List<AssetGenImage> get values => [facebook, google, homeImg, instagram];
 }
 
 class Assets {

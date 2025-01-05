@@ -13,11 +13,11 @@ class AuthRepositoryImpl implements IAuthRepository {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return Right(unit);
+      return const Right(unit);
     } on FirebaseAuthException catch (e) {
       String errorMsg;
       if (e.code == "weak-password") {
-        errorMsg = 'Passord is too weak';
+        errorMsg = 'Password is too weak';
       } else if (e.code == "email-already-in-use") {
         errorMsg = 'Email already in use';
       } else {
@@ -25,7 +25,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       }
       return Left(errorMsg);
     } catch (e) {
-      return Left('Feiled to sign up');
+      return const Left('Failed to sign up');
     }
   }
 
@@ -37,7 +37,7 @@ class AuthRepositoryImpl implements IAuthRepository {
         email: email,
         password: password,
       );
-      return Right(unit);
+      return const Right(unit);
     } catch (e) {
       return Left(e.toString());
     }

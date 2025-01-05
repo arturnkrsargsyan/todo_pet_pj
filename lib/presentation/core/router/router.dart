@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:todo_app/presentation/auth/auth_screen.dart';
 import 'package:todo_app/presentation/home/home_screen.dart';
-import 'package:todo_app/presentation/login/login_screen.dart';
-import 'package:todo_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:todo_app/presentation/to_do_page/to_do_screen.dart';
+import 'package:todo_app/presentation/task_screen/task_add_screen.dart';
 
 part 'router.gr.dart';
 
@@ -16,16 +17,16 @@ class AppRouter extends RootStackRouter {
           page: HomeRoute.page,
         ),
         AutoRoute(
-          path: '/login',
-          page: LoginRoute.page,
-        ),
-        AutoRoute(
-          path: '/signup',
-          page: SignUpRoute.page,
+          path: '/auth',
+          page: AuthRoute.page,
         ),
         AutoRoute(
           path: '/to_do',
           page: ToDoRoute.page,
+        ),
+        AutoRoute(
+          path: '/to_do_add',
+          page: TaskAddRoute.page,
         ),
       ];
 }

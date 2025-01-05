@@ -10,6 +10,25 @@
 part of 'router.dart';
 
 /// generated route for
+/// [AuthScreen]
+class AuthRoute extends PageRouteInfo<void> {
+  const AuthRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AuthScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -29,49 +48,33 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [LoginScreen]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
+/// [TaskAddScreen]
+class TaskAddRoute extends PageRouteInfo<void> {
+  const TaskAddRoute({List<PageRouteInfo>? children})
       : super(
-          LoginRoute.name,
+          TaskAddRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'LoginRoute';
+  static const String name = 'TaskAddRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const LoginScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [SignUpScreen]
-class SignUpRoute extends PageRouteInfo<void> {
-  const SignUpRoute({List<PageRouteInfo>? children})
-      : super(
-          SignUpRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SignUpRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const SignUpScreen();
+      return const TaskAddScreen();
     },
   );
 }
 
 /// generated route for
 /// [ToDoScreen]
-class ToDoRoute extends PageRouteInfo<void> {
-  const ToDoRoute({List<PageRouteInfo>? children})
-      : super(
+class ToDoRoute extends PageRouteInfo<ToDoRouteArgs> {
+  ToDoRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           ToDoRoute.name,
+          args: ToDoRouteArgs(key: key),
           initialChildren: children,
         );
 
@@ -80,7 +83,20 @@ class ToDoRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ToDoScreen();
+      final args =
+          data.argsAs<ToDoRouteArgs>(orElse: () => const ToDoRouteArgs());
+      return ToDoScreen(key: args.key);
     },
   );
+}
+
+class ToDoRouteArgs {
+  const ToDoRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ToDoRouteArgs{key: $key}';
+  }
 }

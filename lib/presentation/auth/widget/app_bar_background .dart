@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ClippathClipper extends CustomClipper<Path> {
+class AppBarBackground extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     double w = size.width;
